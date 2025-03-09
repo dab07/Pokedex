@@ -28,6 +28,8 @@
 .pokemon-info {
     text-align: center;
     margin-top: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .pokemon-name {

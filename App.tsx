@@ -103,10 +103,11 @@ function App() {
 
     // Initial load
     useEffect(() => {
-        if (!isSearching) {
+        if (!isSearching && displayedPokemon.length === 0) {
             loadPokemonPage(1);
         }
-    }, []);
+    }, []); // Runs only on mount, not when state changes
+
 
 
     const handleLoadMore = () => {
@@ -120,8 +121,15 @@ function App() {
     // Search functionality
     const handleSearch = async (searchTerm: string) => {
         if (!searchTerm.trim()) {
-            // Reset search mode and avoid overwriting loaded Pokémon
+            // If already in normal mode, do nothing
+            if (!isSearching) return;
+
+            console.log("Clearing search and restoring paginated Pokémon...");
+
             setIsSearching(false);
+            setDisplayedPokemon([]); // Clear previous results
+            setCurrentPage(1);
+            loadPokemonPage(1); // Fetch only once
             return;
         }
 
@@ -166,10 +174,11 @@ function App() {
     };
 
 
+
     return (
         <div className="app">
             <header className="app-header">
-                <h1>Pokédex</h1>
+                <h1>Pokedex</h1>
                 <SearchBar onSearch={handleSearch} />
             </header>
 
@@ -188,7 +197,6 @@ function App() {
                     <div className="no-results">No Pokémon found</div>
                 )}
 
-                {/* Remove the manual "Load More" button since we now have infinite scrolling */}
             </main>
         </div>
     );

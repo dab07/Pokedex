@@ -21,12 +21,14 @@ body {
     padding: 0;
     font-family: sans-serif;
     overflow-y: auto;
+
 }
 
 .app {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+
 }
 
 main {
