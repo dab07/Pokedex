@@ -1,8 +1,9 @@
-// App.tsx
 import React, { useState, useEffect } from 'react';
 import SearchBar from './components/SearchBar';
 import PokemonGrid from './components/PokemonGrid';
 import './css/App.css';
+import PokemonDetail from "./components/PokemonDetail";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 
 type Pokemon = {
     id: number;
@@ -24,10 +25,14 @@ type PokemonBasicInfo = {
     url: string;
 };
 
+type PokemonDetailProps = {
+    pokemon: Pokemon | null;
+};
+
 function App() {
     const [displayedPokemon, setDisplayedPokemon] = useState<Pokemon[]>([]);
     const [allPokemonBasicInfo, setAllPokemonBasicInfo] = useState<PokemonBasicInfo[]>([]);
-    const [isLoadingPage, setIsLoadingPage] = useState<number | null>(null);
+    const [selectedPokemon, setSelectedPokemon] = useState<Pokemon | null>(null);
     const [isSearching, setIsSearching] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -62,14 +67,14 @@ function App() {
     const loadPokemonPage = async (page : number) => {
         if (isLoading) return;
 
-        console.log(`Starting to load page ${page}`);
+        // console.log(`Starting to load page ${page}`);
         setIsLoading(true);
 
         try {
             const startId = (page - 1) * POKEMON_PER_PAGE + 1;
             const endId = page * POKEMON_PER_PAGE;
 
-            console.log(`Loading Pokémon from ID ${startId} to ${endId}`);
+            // console.log(`Loading Pokémon from ID ${startId} to ${endId}`);
 
             const newPokemonBatch : Pokemon[] = [];
             for (let i = startId; i <= endId; i++) {
@@ -80,14 +85,14 @@ function App() {
                         continue;
                     }
                     const data = await response.json();
-                    console.log(`Fetched Pokémon #${i}: ${data.name}`);
+                    // console.log(`Fetched Pokémon #${i}: ${data.name}`);
                     newPokemonBatch.push(data);
                 } catch (error) {
                     console.error(`Error fetching Pokémon #${i}:`, error);
                 }
             }
 
-            console.log(`Successfully loaded ${newPokemonBatch.length} new Pokémon for page ${page}`);
+            // console.log(`Successfully loaded ${newPokemonBatch.length} new Pokémon for page ${page}`);
 
             // Correctly append to the existing array without replacing it
             setDisplayedPokemon(prevPokemon => [...prevPokemon, ...newPokemonBatch]);
@@ -108,24 +113,17 @@ function App() {
         }
     }, []); // Runs only on mount, not when state changes
 
-
-
     const handleLoadMore = () => {
-        console.log("handleLoadMore called, isLoading:", isLoading, "isSearching:", isSearching);
+        // console.log("handleLoadMore called, isLoading:", isLoading, "isSearching:", isSearching);
         if (!isLoading && !isSearching) {
             loadPokemonPage(currentPage);
         }
     };
-
-
     // Search functionality
     const handleSearch = async (searchTerm: string) => {
         if (!searchTerm.trim()) {
             // If already in normal mode, do nothing
             if (!isSearching) return;
-
-            console.log("Clearing search and restoring paginated Pokémon...");
-
             setIsSearching(false);
             setDisplayedPokemon([]); // Clear previous results
             setCurrentPage(1);
@@ -173,32 +171,37 @@ function App() {
         }
     };
 
-
-
     return (
-        <div className="app">
-            <header className="app-header">
-                <h1>Pokedex</h1>
-                <SearchBar onSearch={handleSearch} />
-            </header>
+        <BrowserRouter>
+            <div className="app">
+                <header className="app-header">
+                    <h1>Pokédex</h1>
+                    <SearchBar onSearch={handleSearch} />
+                </header>
 
-            <main>
-                <PokemonGrid
-                    pokemonList={displayedPokemon}
-                    isLoading={isLoading}
-                    onLoadMore={handleLoadMore}
-                />
+                <main>
+                    <Routes>
+                        <Route path="/" element={
+                            <PokemonGrid
+                                pokemonList={displayedPokemon}
+                                isLoading={isLoading}
+                                onLoadMore={handleLoadMore}
+                            />
+                        } />
+                        <Route path="/pokemon/:id" element={<PokemonDetail />} />
+                        <Route path="*" element={<Navigate to="/" />} />
+                    </Routes>
 
-                {isLoading && (
-                    <div className="loading-indicator">Loading Pokémon...</div>
-                )}
+                    {isLoading && (
+                        <div className="loading-indicator">Loading Pokémon...</div>
+                    )}
 
-                {!isLoading && displayedPokemon.length === 0 && (
-                    <div className="no-results">No Pokémon found</div>
-                )}
-
-            </main>
-        </div>
+                    {!isLoading && displayedPokemon.length === 0 && (
+                        <div className="no-results">No Pokémon found</div>
+                    )}
+                </main>
+            </div>
+        </BrowserRouter>
     );
 }
 

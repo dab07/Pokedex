@@ -46,7 +46,6 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Pokémon Image */}
             <img
                 src={pokemon.sprites?.front_default ||
                     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png'}
@@ -61,7 +60,6 @@ function PokemonCard({ pokemon }: PokemonCardProps) {
                 <p className="pokemon-id">#{String(pokemon.id).padStart(3, '0')}</p>
             </div>
 
-            {/* Pokémon Type */}
             <div className="pokemon-types">
                 {pokemon.types.map((typeInfo, index) => (
                     <span key={index} className={`type-badge ${typeInfo.type.name}`}>

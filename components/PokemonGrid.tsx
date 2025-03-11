@@ -1,7 +1,7 @@
-// PokemonGrid.tsx
 import React, { useRef, useEffect } from 'react';
 import PokemonCard from './PokemonCard';
 import '../css/PokemonGrid.css';
+import {Link} from "react-router-dom";
 
 type Pokemon = {
     id: number;
@@ -23,7 +23,7 @@ type PokemonGridProps = {
     onLoadMore: () => void;
 };
 
-function PokemonGrid({ pokemonList, isLoading, onLoadMore }: PokemonGridProps) {
+function PokemonGrid({ pokemonList, isLoading, onLoadMore}: PokemonGridProps) {
     const observerRef = useRef<IntersectionObserver | null>(null);
     const lastPokemonRef = useRef<HTMLDivElement | null>(null);
     useEffect(() => {
@@ -69,6 +69,35 @@ function PokemonGrid({ pokemonList, isLoading, onLoadMore }: PokemonGridProps) {
 
     return (
         <div className="pokemon-grid">
+            {pokemonList.map((pokemon) => (
+                <Link
+                    to={`../pokemon/${pokemon.id}`}
+                    key={pokemon.id}
+                    className="pokemon-card-link"
+                >
+                    <div className="pokemon-card">
+                        <img
+                            src={pokemon.sprites.front_default}
+                            alt={pokemon.name}
+                            className="pokemon-image"
+                        />
+                        <div className="pokemon-info">
+                            <span className="pokemon-id">#{pokemon.id}</span>
+                            <h3>{pokemon.name}</h3>
+                            <div className="pokemon-types">
+                                {pokemon.types.map(typeInfo => (
+                                    <span
+                                        key={typeInfo.type.name}
+                                        className={`type-badge ${typeInfo.type.name}`}
+                                    >
+                                        {typeInfo.type.name}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </Link>
+            ))}
             {pokemonList.map((pokemon, index) => {
                 // Apply the ref to the last Pokémon in the list
                 if (index === pokemonList.length - 1) {

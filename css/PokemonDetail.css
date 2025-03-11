@@ -1,0 +1,182 @@
+/* PokemonDetail.css */
+.pokemon-detail-page {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #3a5d9f;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+.pokemon-detail-card {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.pokemon-detail-header {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.pokemon-id {
+    font-size: 18px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.pokemon-name {
+    margin: 0 0 15px;
+    font-size: 32px;
+    color: #333;
+}
+
+.pokemon-types {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.type-badge {
+    padding: 5px 15px;
+    border-radius: 20px;
+    text-transform: capitalize;
+    font-weight: 500;
+    color: white;
+}
+
+.pokemon-image-container {
+    display: flex;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 30px;
+}
+
+.pokemon-detail-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+}
+
+.pokemon-info-sections {
+    padding: 20px;
+}
+
+.pokemon-info-sections section {
+    margin-bottom: 30px;
+}
+
+.pokemon-info-sections h2 {
+    margin-bottom: 15px;
+    font-size: 20px;
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label, .stat-label {
+    font-size: 14px;
+    color: #777;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.abilities-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.abilities-list li {
+    margin-bottom: 8px;
+    text-transform: capitalize;
+}
+
+.hidden-ability {
+    font-size: 14px;
+    color: #999;
+    font-style: italic;
+}
+
+.stats-grid {
+    display: grid;
+    gap: 12px;
+}
+
+.stat-item {
+    display: grid;
+    grid-template-columns: 100px 1fr 40px;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-bar-container {
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.stat-bar {
+    height: 100%;
+    background-color: #3a5d9f;
+    border-radius: 4px;
+}
+
+.stat-value {
+    font-weight: 500;
+    text-align: right;
+}
+
+.error-container {
+    text-align: center;
+    padding: 50px 20px;
+}
+
+/* Also add specific colors for the type badges as in your original PokemonGrid CSS */
+.normal { background-color: #A8A878; }
+.fire { background-color: #F08030; }
+.water { background-color: #6890F0; }
+.grass { background-color: #78C850; }
+.electric { background-color: #F8D030; }
+.ice { background-color: #98D8D8; }
+.fighting { background-color: #C03028; }
+.poison { background-color: #A040A0; }
+.ground { background-color: #E0C068; }
+.flying { background-color: #A890F0; }
+.psychic { background-color: #F85888; }
+.bug { background-color: #A8B820; }
+.rock { background-color: #B8A038; }
+.ghost { background-color: #705898; }
+.dragon { background-color: #7038F8; }
+.dark { background-color: #705848; }
+.steel { background-color: #B8B8D0; }
+.fairy { background-color: #EE99AC; }

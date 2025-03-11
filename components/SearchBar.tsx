@@ -1,4 +1,3 @@
-// SearchBar.tsx
 import React, { useState, useEffect, useCallback } from 'react';
 import '../css/SearchBar.css';
 
