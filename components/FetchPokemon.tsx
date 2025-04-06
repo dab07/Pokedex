@@ -1,6 +1,9 @@
 import react, {useEffect, useState} from 'react';
 import PokemonGrid from "./PokemonGrid";
 import '../css/PokemonGrid.css'
+import {StyleSheet} from "react-native";
+import NavigationBar from "./NavigationBar";
+
 type Pokemon = {
     id: number;
     name: string;
@@ -21,6 +24,7 @@ type Pokemon = {
 const FetchPokemon = () => {
     const [pokemons, setpokemons] = useState<Pokemon[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [searchPokemon, setSearchPokemon] = useState<Pokemon[]>([]);
     useEffect(() => {
         const fetchPokemons = async () => {
             try {
@@ -47,6 +51,7 @@ const FetchPokemon = () => {
                 );
 
                 setpokemons(detailedPokemon);
+                setSearchPokemon(detailedPokemon);
             } catch (e) {
                 console.error("Failed to fetch Pokemons", e);
             } finally {
@@ -56,12 +61,49 @@ const FetchPokemon = () => {
         fetchPokemons();
     }, []);
 
+    const handleSearchPokemon = (pokemonSearchString : string) => {
+        if (!pokemonSearchString.trim()) {
+            setSearchPokemon(pokemons);
+            return;
+        }
+        const filteredPokemons = pokemons.filter((pokeSearch) => {
+            const idString = pokeSearch.id.toString().includes(pokemonSearchString.trim());
+            const nameString = pokeSearch.name.toLowerCase().toString().includes(pokemonSearchString.trim().toLowerCase());
+            return idString ||nameString;
+        });
+        setSearchPokemon(filteredPokemons);
+    }
+
+    const handleSortedPokemons = (sortOrder : string) => {
+        const sortedPokemons = [...searchPokemon];
+
+        switch (sortOrder) {
+            case 'a-z':
+                sortedPokemons.sort((a, b) => a.name.localeCompare(b.name));
+                break;
+            case 'z-a':
+                sortedPokemons.sort((a, b) => b.name.localeCompare(a.name));
+                break;
+            case 'id-asc':
+                sortedPokemons.sort((a, b) => a.id - b.id);
+                break;
+            case 'id-desc':
+                sortedPokemons.sort((a, b) => b.id - a.id);
+                break;
+            default:
+                sortedPokemons.sort((a, b) => a.id - b.id);
+        }
+        setSearchPokemon(sortedPokemons);
+    }
 
     return (
-        <div className="pokemon-container">
-            {pokemons.map(pokemon => (
-                <PokemonGrid key={pokemon.id} pokemon={pokemon}></PokemonGrid>
-            ))}
+        <div>
+            <NavigationBar onSearch={handleSearchPokemon} onSort={handleSortedPokemons}/>
+            <div className="pokemon-container">
+                {searchPokemon.map(poke => (
+                    <PokemonGrid key={poke.id} pokemon={poke}></PokemonGrid>
+                ))}
+            </div>
         </div>
     )
 }
