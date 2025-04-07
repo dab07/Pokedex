@@ -1,8 +1,9 @@
-import react, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import PokemonGrid from "./PokemonGrid";
 import '../css/PokemonGrid.css'
-import {StyleSheet} from "react-native";
 import NavigationBar from "./NavigationBar";
+import ComparePokemon from "./ComparePokemon";
+import {useNavigate} from "react-router-dom";
 
 type Pokemon = {
     id: number;
@@ -25,6 +26,7 @@ const FetchPokemon = () => {
     const [pokemons, setpokemons] = useState<Pokemon[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [searchPokemon, setSearchPokemon] = useState<Pokemon[]>([]);
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchPokemons = async () => {
             try {
@@ -49,7 +51,6 @@ const FetchPokemon = () => {
                         };
                     })
                 );
-
                 setpokemons(detailedPokemon);
                 setSearchPokemon(detailedPokemon);
             } catch (e) {
@@ -95,15 +96,16 @@ const FetchPokemon = () => {
         }
         setSearchPokemon(sortedPokemons);
     }
-
     return (
         <div>
-            <NavigationBar onSearch={handleSearchPokemon} onSort={handleSortedPokemons}/>
+            <NavigationBar onSearch={handleSearchPokemon} onSort={handleSortedPokemons} pokemon={pokemons}/>
+            {isLoading ? <h2>Loading...</h2> : null}
             <div className="pokemon-container">
                 {searchPokemon.map(poke => (
                     <PokemonGrid key={poke.id} pokemon={poke}></PokemonGrid>
                 ))}
             </div>
+
         </div>
     )
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import '../css/PokemonGrid.css';
+import {Link} from "react-router-dom";
 
 type Pokemon = {
     id: number;
@@ -20,27 +21,30 @@ type Pokemon = {
 
 const PokemonGrid= ({ pokemon } : {pokemon : Pokemon}) => {
     return (
-        <div className="pokemon-card">
-            <div className="card-content">
-                <div className="card-image">
-                    <img src={pokemon.image} alt={pokemon.name} />
-                </div>
-                <div className="card-footer">
-                    <div className="card-name">
-                        {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+        <Link to={`/${pokemon.name}`}>
+            <div className="pokemon-card">
+                <div className="card-content">
+                    <div className="card-image">
+                        <img src={pokemon.image} alt={pokemon.name} />
                     </div>
-                    <div className="card-types">
-                        {pokemon.types.map((typeInfo, index) => (
-                            <span key={index} className={`type ${typeInfo.type.name}`}>
+                    <div className="card-footer">
+                        <div className="card-name">
+                            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+                        </div>
+                        <div className="card-types">
+                            {pokemon.types.map((typeInfo, index) => (
+                                <span key={index} className={`type ${typeInfo.type.name}`}>
                                 {typeInfo.type.name}
                             </span>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
 
+                    </div>
                 </div>
+                <div className="card-id">#{pokemon.id.toString().padStart(4, '0')}</div>
             </div>
-            <div className="card-id">#{pokemon.id.toString().padStart(4, '0')}</div>
-        </div>
+        </Link>
+
     );
 };
 

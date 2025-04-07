@@ -1,9 +1,28 @@
 import React, { useState } from 'react';
 import '../css/NavigationBar.css';
+import {Link} from "react-router-dom";
+
+type Pokemon = {
+    id: number;
+    name: string;
+    url: string;
+    image: string;
+    types : Array<{
+        type : {
+            name: string,
+        }
+    }>
+    past_types: Array<{
+        generation : {
+            name: string,
+        }
+    }>
+}
 
 type NavigationBarProps = {
     onSearch: (searchTerm: string) => void;
     onSort: (sortMethod: string) => void;
+    pokemon : Pokemon[];
 }
 
 const NavigationBar= ({ onSearch, onSort } : NavigationBarProps) => {
@@ -34,9 +53,8 @@ const NavigationBar= ({ onSearch, onSort } : NavigationBarProps) => {
                     <option value="id-asc">ID (Ascending)</option>
                     <option value="id-desc">ID (Descending)</option>
                 </select>
-
                 <button className="advanced-filter-btn">Advanced Filters</button>
-                <button className="compare-btn">Compare</button>
+                <Link to={`/compare`}>Compare</Link>
             </div>
         </div>
     );

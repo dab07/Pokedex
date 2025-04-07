@@ -1,0 +1,95 @@
+.pokemon-compare {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.selection-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.pokemon-select {
+    width: 45%;
+}
+
+.pokemon-select select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+}
+
+.comparison-results {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.pokemon-images {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.pokemon-images img {
+    width: 120px;
+    height: 120px;
+}
+
+.vs {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.stats-comparison {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.stats-comparison th, .stats-comparison td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.stats-comparison .higher {
+    color: green;
+    font-weight: bold;
+}
+
+.types-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.type {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    color: white;
+    background-color: #999;
+}
+
+.type.normal { background-color: #A8A878; }
+.type.fire { background-color: #F08030; }
+.type.water { background-color: #6890F0; }
+.type.grass { background-color: #78C850; }
+.type.electric { background-color: #F8D030; }
+.type.ice { background-color: #98D8D8; }
+.type.fighting { background-color: #C03028; }
+.type.poison { background-color: #A040A0; }
+.type.ground { background-color: #E0C068; }
+.type.flying { background-color: #A890F0; }
+.type.psychic { background-color: #F85888; }
+.type.bug { background-color: #A8B820; }
+.type.rock { background-color: #B8A038; }
+.type.ghost { background-color: #705898; }
+.type.dragon { background-color: #7038F8; }
+.type.dark { background-color: #705848; }
+.type.steel { background-color: #B8B8D0; }
+.type.fairy { background-color: #EE99AC; }
