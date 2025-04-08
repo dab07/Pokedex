@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import PokemonGrid from "./PokemonGrid";
 import '../css/PokemonGrid.css'
 import NavigationBar from "./NavigationBar";
-import ComparePokemon from "./ComparePokemon";
 import {useNavigate} from "react-router-dom";
 
 type Pokemon = {
@@ -98,6 +97,7 @@ const FetchPokemon = () => {
     }
     return (
         <div>
+
             <NavigationBar onSearch={handleSearchPokemon} onSort={handleSortedPokemons} pokemon={pokemons}/>
             {isLoading ? <h2>Loading...</h2> : null}
             <div className="pokemon-container">

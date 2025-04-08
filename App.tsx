@@ -9,7 +9,6 @@ import ComparePokemon from "./components/ComparePokemon";
 function App() {
     return (
         <div className="App">
-            <h1>PokeDecx</h1>
             <BrowserRouter>
                 <Routes>
                     <Route path="/" element={<FetchPokemon/>}/>

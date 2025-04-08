@@ -67,18 +67,6 @@ const PokemonCompare = () => {
         fetchPokemon(e.target.value, setPokemon2);
     };
 
-    const renderStatComparison = (stat1: number, stat2: number, statName: string) => {
-        const higher = stat1 > stat2 ? 'pokemon1' : stat1 < stat2 ? 'pokemon2' : 'equal';
-
-        return (
-            <tr key={statName}>
-                <td className={higher === 'pokemon1' ? 'higher' : ''}>{stat1}</td>
-                <td>{statName}</td>
-                <td className={higher === 'pokemon2' ? 'higher' : ''}>{stat2}</td>
-            </tr>
-        );
-    };
-
     return (
         <div className="pokemon-compare">
             <h1>Compare Pokémon</h1>
@@ -122,36 +110,6 @@ const PokemonCompare = () => {
                             <Link to={`/${pokemon2.name}`}>View Details</Link>
                         </div>
                     </div>
-
-                    <h3>Base Stats Comparison</h3>
-                    <table className="stats-comparison">
-                        <thead>
-                        <tr>
-                            <th>{pokemon1.name}</th>
-                            <th>Stat</th>
-                            <th>{pokemon2.name}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {pokemon1.stats.map((stat: any, index: number) => (
-                            renderStatComparison(
-                                stat.base_stat,
-                                pokemon2.stats[index].base_stat,
-                                stat.stat.name
-                            )
-                        ))}
-                        <tr>
-                            <td>{pokemon1.height / 10} m</td>
-                            <td>Height</td>
-                            <td>{pokemon2.height / 10} m</td>
-                        </tr>
-                        <tr>
-                            <td>{pokemon1.weight / 10} kg</td>
-                            <td>Weight</td>
-                            <td>{pokemon2.weight / 10} kg</td>
-                        </tr>
-                        </tbody>
-                    </table>
 
                     <div className="type-comparison">
                         <h3>Types</h3>
