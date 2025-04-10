@@ -150,11 +150,10 @@ const PokemonDetail = () => {
                 </ul>
             </div>
 
-            <div className="pokemon-evolchain-section">
-                <h2>Evolution Chain</h2>
-                <div className="evolution-chain">
-                    {evolutionDetails.map((evoPokemon, index) => (
-                        <div key={evoPokemon.name} className="evo-pokemon">
+            <div className="evolution-chain">
+                {evolutionDetails.map((evoPokemon, index) => (
+                    <div className="evo-detail" key={evoPokemon.name}>
+                        <div className="evo-pokemon">
                             <img
                                 src={evoPokemon.sprites.front_default}
                                 alt={evoPokemon.name}
@@ -164,12 +163,12 @@ const PokemonDetail = () => {
                                 {evoPokemon.name}
                                 <span className="evo-id">#{evoPokemon.id}</span>
                             </p>
-                            {index < evolutionDetails.length - 1 && (
-                                <div className="evo-arrow">→</div>
-                            )}
                         </div>
-                    ))}
-                </div>
+                        {index < evolutionDetails.length - 1 && (
+                            <div className="evo-arrow">→</div>
+                        )}
+                    </div>
+                ))}
             </div>
 
             <div className="pokemon-compare">
