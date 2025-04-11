@@ -4,23 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*@layer base {*/
-/*    body {*/
-/*        @apply bg-pixel font-pixel;*/
-/*    }*/
-/*}*/
-
-/*@layer utilities {*/
-/*    .font-pixel {*/
-/*        font-family: 'Press Start 2P', system-ui, sans-serif;*/
-/*    }*/
-
-/*    .bg-pixel {*/
-/*        background-size: 64px 64px;*/
-/*        background-color: white;*/
-/*    }*/
-/*}*/
-
 * {
     margin: 0;
     padding: 0;
