@@ -9,18 +9,55 @@
 
 .pokemon-card {
     position: relative;
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    background: #fff;
+    width: 270px;
+    border-radius: 20px;
+    background: #1b233d;
+    padding: 5px;
     overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s ease;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 20px 0;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)
 }
 
 .pokemon-card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.05);
 }
+
+.card-header {
+    height: 270px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    position: relative;
+}
+
+.border {
+    border-bottom-right-radius: 15px;
+    border-top-left-radius: 15px;
+    height: 35px;
+    width: 130px;
+    background: #1b233d;
+    position: relative;
+    transform: skew(-40deg);
+    box-shadow: -10px -10px 0 0 #1b233d;
+}
+.border::before {
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 0;
+    right: -15px;
+    background: rgba(255, 255, 255, 0);
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 2px #1b233d;
+}
+
+.card-id {
+    color: #ffffff;
+    text-decoration: none;
+}
+
 
 .card-content {
     padding: 15px;
@@ -33,29 +70,30 @@
 }
 
 .card-image {
-    width: 150px;
-    height: 150px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
+    font-size: 17px;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+    letter-spacing: 2px;
+    border-radius: 15px;
 }
 
 .card-image img {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     object-fit: contain;
 }
 
 .card-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin-top: 15px;
+    padding: 10px 5px;
 }
 
 .card-name {
     font-weight: bold;
     font-size: 22px;
+    color: white;
     margin-bottom: 8px;
     text-transform: capitalize;
 }
@@ -63,8 +101,9 @@
 .card-types {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 8px;
     justify-content: center;
+    margin-bottom: 10px;
 }
 
 .type {
@@ -76,7 +115,6 @@
     display: inline-block;
 }
 
-/* Type Colors */
 .type.normal { background-color: #A8A878; }
 .type.fire { background-color: #F08030; }
 .type.water { background-color: #6890F0; }
@@ -96,13 +134,6 @@
 .type.steel { background-color: #B8B8D0; }
 .type.fairy { background-color: #EE99AC; }
 
-.card-id {
-    position: absolute;
-    bottom: 10px;
-    left: 15px;
-    color: #666;
-    font-size: 14px;
-}
 
 /* Responsive Grid */
 @media (max-width: 1024px) {
