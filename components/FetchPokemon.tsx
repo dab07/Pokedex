@@ -97,7 +97,7 @@ const FetchPokemon = () => {
     }
     return (
         <div>
-            <div>PokeLab</div>
+            <div className="App-name">PokeLab</div>
             <NavigationBar onSearch={handleSearchPokemon} onSort={handleSortedPokemons} pokemon={pokemons}/>
             {isLoading ? <h2>Loading...</h2> : null}
             <div className="pokemon-container">
