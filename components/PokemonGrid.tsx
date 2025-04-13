@@ -29,6 +29,7 @@ const PokemonGrid= ({ pokemon } : {pokemon : Pokemon}) => {
                         <div className="card-image">
                             <img src={pokemon.image} alt={pokemon.name} />
                         </div>
+                    <Link to={`/${pokemon.id}`}>View Detail</Link>
                 </div>
                 <div className="card-name">
                     {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
